@@ -1,6 +1,7 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
 require('dotenv').config();
+const requests = require('request');
 
 client.once('ready', () => {
 	console.log('Ready!');
