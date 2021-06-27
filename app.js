@@ -19,7 +19,7 @@ client.on('message', message => {
 	else if (message.content === delim + 'daily') {
 		fetch('http://www.sefaria.org/api/calendars')
 		.then(res => res.json())
-		.then(json => message.channel.send(json.body));
+		.then(json => console.log(json));
 	}
 	//!parsha returns weekly parsha
 	else if (message.content === delim + 'parsha') {
