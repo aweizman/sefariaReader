@@ -17,16 +17,18 @@ client.on('message', message => {
 	} 
 	//!daily returns daily content from Calendar API
 	else if (message.content === delim + 'daily') {
-		//var dailyContent = requests.get('http://www.sefaria.org/api/calendars?timezone=America/New_York'); //FIXME: change to get timezone based on user input
-		var response = 'this feature is currently unavailable';
-		message.channel.send(response);
+		fetch('http://www.sefaria.org/api/calendars')
+		.then(res => res.json())
+		.then(json => message.channel.send(json.body));
 	}
 	//!parsha returns weekly parsha
 	else if (message.content === delim + 'parsha') {
-		var dailyContent = https.request.get('http://www.sefaria.org/api/calendars').body;
-		console.log(dailyContent);
-		var parshaContent = https.request.get('http://www.sefaria.org/api/text/' + JSON.stringify(dailyContent.url));
-		message.channel.send(JSON.stringify(dailyContent.title) + ':\n' + JSON.stringify(parshaContent.text));
+		fetch('http://www.sefaria.org/api/calendars')
+		.then(res => res.json())
+		.then(json => console.log(json));
+		
+		//var parshaContent = https.request.get('http://www.sefaria.org/api/text/' + JSON.stringify(dailyContent.url));
+		//message.channel.send(JSON.stringify(dailyContent.title) + ':\n' + JSON.stringify(parshaContent.text));
 	}
 
 
