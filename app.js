@@ -29,14 +29,15 @@ client.on('message', async message => {
 
 		const { calendar_items } = await fetch('http://www.sefaria.org/api/calendars?timezone=America/New_York').then(response => response.json());
 
-		message.channel.send(calendar_items[0].title.en);
+		message.channel.send(calendar_items[0].title.en + '\n' + calendar_items[0].title.he);
 	}
 	//!parsha returns weekly parsha
 	else if (message.content === delim + 'parsha') {
 
-		const { parsha } = await fetch('http://www.sefaria.org/api/calendars?timezone=America/New_York').then(res => res.json());
+		const { calendar_items } = await fetch('http://www.sefaria.org/api/calendars?timezone=America/New_York').then(res => res.json());
 
-		message.channel.send(parsha.calendar_items[0].en);
+		message.channel.send(calendar_items[0].title.en + '\n' + calendar_items[0].title.he);
+		
 		
 		//var parshaContent = https.request.get('http://www.sefaria.org/api/text/' + JSON.stringify(dailyContent.url));
 		//message.channel.send(JSON.stringify(dailyContent.title) + ':\n' + JSON.stringify(parshaContent.text));
