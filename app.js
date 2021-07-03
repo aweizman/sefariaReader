@@ -27,9 +27,9 @@ client.on('message', async message => {
 	//!daily returns daily content from Calendar API
 	else if (message.content === delim + 'daily') {
 
-		const { daily } = await fetch('http://www.sefaria.org/api/calendars?timezone=America/New_York').then(response => response.json());
+		const { calendar_items } = await fetch('http://www.sefaria.org/api/calendars?timezone=America/New_York').then(response => response.json());
 
-		message.channel.send(daily.calendar_items[0].he);
+		message.channel.send(calendar_items[0].title.en);
 	}
 	//!parsha returns weekly parsha
 	else if (message.content === delim + 'parsha') {
