@@ -43,7 +43,7 @@ client.on('message', async message => {
 		.setColor(0xff0000)
 		.setDescription('test description');
 		
-		
+		message.channel.send(parsha);
 		//var parshaContent = https.request.get('http://www.sefaria.org/api/text/' + JSON.stringify(dailyContent.url));
 		//message.channel.send(JSON.stringify(dailyContent.title) + ':\n' + JSON.stringify(parshaContent.text));
 	}
