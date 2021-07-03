@@ -20,7 +20,7 @@ client.on('message', async message => {
 
 		const { daily } = await fetch('http://www.sefaria.org/api/calendars?timezone=America/New_York').then(response => response.json());
 
-		message.reply(daily);
+		message.channel.send(daily);
 	}
 	//!parsha returns weekly parsha
 	else if (message.content === delim + 'parsha') {
