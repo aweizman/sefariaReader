@@ -40,7 +40,7 @@ client.on('message', async message => {
 
 		const parsha = new MessageEmbed()
 		.setTitle(calendar_items[0].title.en + ' | ' + calendar_items[0].title.he)
-		.setColor(0xff0000)
+		.setColor(0x212e50)
 		.setDescription('test description');
 		
 		message.channel.send(parsha);
