@@ -39,6 +39,12 @@ client.on('message', async message => {
 
 		const { text } = await fetch('http://www.sefaria.org/api/texts/' + calendar_items[0].url).then(res => res.json());
 
+		var sectionNums = calendar_items[0].url.split(/[-.]/g); //[2] and [4] are the start and end lines of the parsha
+
+		var sectionStart = sectionNums[2];
+
+		var sectionEnd = sectionNums[4];
+
 		var section = 0;
 		var sectionMax = text.length;
 
