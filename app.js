@@ -24,7 +24,7 @@ client.on('message', async message => {
 
 		message.channel.send(file);
 	} 
-	//!daily returns daily content from Calendar API
+	//!daily returns daily content from Calendar API (for now, only returns name of parsha)
 	else if (message.content === delim + 'daily') {
 
 		const { calendar_items } = await fetch('http://www.sefaria.org/api/calendars?timezone=America/New_York').then(response => response.json());
@@ -36,7 +36,7 @@ client.on('message', async message => {
 
 		const { calendar_items } = await fetch('http://www.sefaria.org/api/calendars?timezone=America/New_York').then(res => res.json());
 
-		//const { text } = await fetch('http://www.sefaria.org/api/text' + calendar_items[0].url).then(res => res.json());
+		const { text } = await fetch('http://www.sefaria.org/api/text' + calendar_items[0].url).then(res => res.json());
 
 		const parsha = new MessageEmbed()
 		.setTitle(calendar_items[0].title.en + ' | ' + calendar_items[0].title.he)
