@@ -31,7 +31,7 @@ client.on('message', async message => {
 
 		const { parsha } = await fetch('http://www.sefaria.org/api/calendars?timezone=America/New_York').then(res => res.json());
 
-		message.channel.send(daily.calendar_items[0].en);
+		message.channel.send(parsha.calendar_items[0].en);
 		
 		//var parshaContent = https.request.get('http://www.sefaria.org/api/text/' + JSON.stringify(dailyContent.url));
 		//message.channel.send(JSON.stringify(dailyContent.title) + ':\n' + JSON.stringify(parshaContent.text));
