@@ -18,6 +18,11 @@ client.on('message', async message => {
 	//!ping returns Pong
 	if (message.content === delim + 'ping') {
 		message.reply('Pong!');
+	}
+	else if (message.content === delim + 'cat') {
+		const { file } = await fetch('https://aws.random.cat/meow').then(response => response.json());
+
+		message.channel.send(file);
 	} 
 	//!daily returns daily content from Calendar API
 	else if (message.content === delim + 'daily') {
