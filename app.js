@@ -40,6 +40,7 @@ client.on('message', async message => {
 		const { text } = await fetch('http://www.sefaria.org/api/texts/' + calendar_items[0].url).then(res => res.json());
 		
 		var section = 0;
+		var sectionMax = text.length;
 
 		const parsha = new MessageEmbed()
 		.setTitle(calendar_items[0].title.en + ' | ' +  calendar_items[0].displayValue.en + '\n ' + calendar_items[0].title.he + ' | ' + calendar_items[0].displayValue.he)
