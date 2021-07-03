@@ -17,16 +17,23 @@ client.on('message', message => {
 	} 
 	//!daily returns daily content from Calendar API
 	else if (message.content === delim + 'daily') {
+
+		const { daily } = await fetch('http://www.sefaria.org/api/calendars').then(res => res.json());
+
+		reply = new Discord.MessageEmbed()
+		.setTitle('test title')
+		.setDescription('this is a test');
+		message.reply(daily);
+	}
+	//!parsha returns weekly parsha
+	else if (message.content === delim + 'parsha') {
+
+		const { parsha } = await fetch('http://www.sefaria.org/api/calendars').then(res => res.json());
+
 		reply = new Discord.MessageEmbed()
 		.setTitle('test title')
 		.setDescription('this is a test');
 		message.reply(reply);
-	}
-	//!parsha returns weekly parsha
-	else if (message.content === delim + 'parsha') {
-		fetch('http://www.sefaria.org/api/calendars')
-		.then(res => res.json())
-		.then(json => console.log(json));
 		
 		//var parshaContent = https.request.get('http://www.sefaria.org/api/text/' + JSON.stringify(dailyContent.url));
 		//message.channel.send(JSON.stringify(dailyContent.title) + ':\n' + JSON.stringify(parshaContent.text));
