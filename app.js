@@ -13,7 +13,7 @@ client.on('message', async message => {
 
 	if (!message.content.startsWith(delim) || message.author.bot) return; //bot does not need to worry about messages w/ out delim or messages sent by itself
 
-	console.log(message.author + ': ' + message.content); //logs every message
+	console.log(message.author + ': ' + message.content); //logs every command made
 
 	//!ping returns Pong
 	if (message.content === delim + 'ping') {
