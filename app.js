@@ -8,18 +8,21 @@ client.once('ready', () => {
 });
 
 var delim = '!'; //standard delimiter for commands. default is !, but can be changed.
-
+var reply;
 client.on('message', message => {
 	console.log(message.author + ': ' + message.content); //logs every message
 	//!ping returns Pong
 	if (message.content === delim + 'ping') {
-		message.channel.send('Pong');
+		reply = 'Pong!';
 	} 
 	//!daily returns daily content from Calendar API
 	else if (message.content === delim + 'daily') {
 		fetch('http://www.sefaria.org/api/calendars')
 		.then(res => res.json())
-		.then(json => console.log(json));
+		.then(json => {reply = new MessageEmbed()
+			.setTitle('Daily Content:')
+			.setColor(0xff0000)
+			.setDescription(json)});
 	}
 	//!parsha returns weekly parsha
 	else if (message.content === delim + 'parsha') {
@@ -30,6 +33,8 @@ client.on('message', message => {
 		//var parshaContent = https.request.get('http://www.sefaria.org/api/text/' + JSON.stringify(dailyContent.url));
 		//message.channel.send(JSON.stringify(dailyContent.title) + ':\n' + JSON.stringify(parshaContent.text));
 	}
+
+	message.channel.reply(reply);
 
 
 });
