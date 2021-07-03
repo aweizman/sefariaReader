@@ -13,7 +13,7 @@ client.on('message', message => {
 	console.log(message.author + ': ' + message.content); //logs every message
 	//!ping returns Pong
 	if (message.content === delim + 'ping') {
-		reply = 'Pong!';
+		message.reply('Pong!');
 	} 
 	//!daily returns daily content from Calendar API
 	else if (message.content === delim + 'daily') {
@@ -23,6 +23,8 @@ client.on('message', message => {
 			.setTitle('Daily Content:')
 			.setColor(0xff0000)
 			.setDescription(json)});
+
+		message.reply(reply);
 	}
 	//!parsha returns weekly parsha
 	else if (message.content === delim + 'parsha') {
@@ -33,8 +35,6 @@ client.on('message', message => {
 		//var parshaContent = https.request.get('http://www.sefaria.org/api/text/' + JSON.stringify(dailyContent.url));
 		//message.channel.send(JSON.stringify(dailyContent.title) + ':\n' + JSON.stringify(parshaContent.text));
 	}
-
-	message.channel.reply(reply);
 
 
 });
