@@ -1,5 +1,5 @@
-const Discord = require('discord.js');
-const client = new Discord.Client();
+const { Client, MessageEmbed } = require('discord.js');
+const client = new Client();
 require('dotenv').config();
 const fetch = require('node-fetch');
 
@@ -10,7 +10,11 @@ client.once('ready', () => {
 var delim = '!'; //standard delimiter for commands. default is !, but can be changed.
 var reply;
 client.on('message', async message => {
+
+	if (!message.content.startsWith(delim) || message.author.bot) return; //bot does not need to worry about messages w/ out delim or messages sent by itself
+
 	console.log(message.author + ': ' + message.content); //logs every message
+
 	//!ping returns Pong
 	if (message.content === delim + 'ping') {
 		message.reply('Pong!');
@@ -18,7 +22,7 @@ client.on('message', async message => {
 	//!daily returns daily content from Calendar API
 	else if (message.content === delim + 'daily') {
 
-		const { daily } = await fetch('https://aws.random.cat/meow').then(response => response.json());
+		const { daily } = await fetch('http://www.sefaria.org/api/calendars?timezone=America/New_York').then(response => response.json());
 
 		message.channel.send(daily);
 	}
