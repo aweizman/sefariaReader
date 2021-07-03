@@ -18,17 +18,14 @@ client.on('message', async message => {
 	//!daily returns daily content from Calendar API
 	else if (message.content === delim + 'daily') {
 
-		const { daily } = await fetch('http://www.sefaria.org/api/calendars').then(res => res.json());
+		const { daily } = await fetch('http://www.sefaria.org/api/calendars?timezone=America/New_York').then(response => response.json());
 
-		reply = new Discord.MessageEmbed()
-		.setTitle('test title')
-		.setDescription('this is a test');
 		message.reply(daily);
 	}
 	//!parsha returns weekly parsha
 	else if (message.content === delim + 'parsha') {
 
-		const { parsha } = await fetch('http://www.sefaria.org/api/calendars').then(res => res.json());
+		const { parsha } = await fetch('http://www.sefaria.org/api/calendars?timezone=America/New_York').then(res => res.json());
 
 		reply = new Discord.MessageEmbed()
 		.setTitle('test title')
