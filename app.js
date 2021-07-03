@@ -19,7 +19,7 @@ client.on('message', message => {
 	else if (message.content === delim + 'daily') {
 		fetch('http://www.sefaria.org/api/calendars')
 		.then(res => res.json())
-		.then(json => {reply = new MessageEmbed()
+		.then(json => {reply = new Discord.MessageEmbed()
 			.setTitle('Daily Content:')
 			.setColor(0xff0000)
 			.setDescription(json)});
