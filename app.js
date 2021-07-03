@@ -38,14 +38,14 @@ client.on('message', async message => {
 		const { calendar_items } = await fetch('http://www.sefaria.org/api/calendars?timezone=America/New_York').then(res => res.json());
 
 		const { text } = await fetch('http://www.sefaria.org/api/texts/' + calendar_items[0].url).then(res => res.json());
-		
+
 		var section = 0;
 		var sectionMax = text.length;
 
 		const parsha = new MessageEmbed()
 		.setTitle(calendar_items[0].title.en + ' | ' +  calendar_items[0].displayValue.en + '\n ' + calendar_items[0].title.he + ' | ' + calendar_items[0].displayValue.he)
 		.setColor(0x212e50)
-		.setDescription(text[section]);
+		.setDescription(text[section].map(s => s.replace(/\<\/?i\>/g, '')));
 		
 		message.channel.send(parsha);
 	}
