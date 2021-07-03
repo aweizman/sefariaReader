@@ -17,13 +17,9 @@ client.on('message', message => {
 	} 
 	//!daily returns daily content from Calendar API
 	else if (message.content === delim + 'daily') {
-		fetch('http://www.sefaria.org/api/calendars')
-		.then(res => res.json())
-		.then(json => {reply = new Discord.MessageEmbed()
-			.setTitle('Daily Content:')
-			.setColor(0xff0000)
-			.setDescription(json)});
-
+		reply = new Discord.MessageEmbed()
+		.setTitle('test title')
+		.setDescription('this is a test');
 		message.reply(reply);
 	}
 	//!parsha returns weekly parsha
