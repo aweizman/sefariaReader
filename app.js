@@ -18,7 +18,7 @@ client.on('message', async message => {
 	//!daily returns daily content from Calendar API
 	else if (message.content === delim + 'daily') {
 
-		const { daily } = await fetch('http://www.sefaria.org/api/calendars?timezone=America/New_York').then(response => response.json());
+		const { daily } = await fetch('https://aws.random.cat/meow').then(response => response.json());
 
 		message.channel.send(daily);
 	}
