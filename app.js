@@ -9,7 +9,7 @@ client.once('ready', () => {
 
 var delim = '!'; //standard delimiter for commands. default is !, but can be changed.
 var reply;
-client.on('message', message => {
+client.on('message', async message => {
 	console.log(message.author + ': ' + message.content); //logs every message
 	//!ping returns Pong
 	if (message.content === delim + 'ping') {
