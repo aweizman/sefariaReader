@@ -31,7 +31,7 @@ client.on('message', async message => {
 
 		message.channel.send(calendar_items[0].title.en + '\n' + calendar_items[0].title.he);
 	}
-	//!parsha returns weekly parsha
+	//!parsha returns first section of weekly parsha, embed description is edited when reacted w/ emote
 	else if (message.content === delim + 'parsha') {
 
 		const { calendar_items } = await fetch('http://www.sefaria.org/api/calendars?timezone=America/New_York').then(res => res.json());
@@ -41,7 +41,7 @@ client.on('message', async message => {
 		const parsha = new MessageEmbed()
 		.setTitle(calendar_items[0].title.en + ' | ' + calendar_items[0].title.he)
 		.setColor(0x212e50)
-		.setDescription(text);
+		.setDescription(text[0]);
 		
 		message.channel.send(parsha);
 	}
