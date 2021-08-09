@@ -29,7 +29,7 @@ client.once('ready', () => {
 
 	];
 
-	client.applications.commands.create(commands);
+	client.application.commands.create(commands);
 	console.log('Ready!');
 });
 
