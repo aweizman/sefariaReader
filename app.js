@@ -27,8 +27,15 @@ const commands = [
 ];
 
 client.once('ready', () => {
-	client.application.commands.create(commands);
 	console.log('Ready!');
+});
+
+client.on('messageCreate', async message => {
+	if (!client.application?.owner) await client.application?.fetch();
+
+	if (message.content.toLowerCase() === '!deploy' && message.author.id === client.application?.owner.id) {
+		await client.application?.commands.create(commands).then(console.log('Deployed!'));
+	}
 });
 
 //var delim = '!'; //standard delimiter for commands. default is !, but can be changed.
