@@ -4,28 +4,54 @@ require('dotenv').config();
 const fetch = require('node-fetch');
 
 client.once('ready', () => {
+
+	//creating commands
+	const commands = [
+		{
+			name: 'ping',
+			description: 'replies with pong'
+		},
+
+		{
+			name: 'cat',
+			description: 'replies with a picture of a cat'
+		},
+
+		{
+			name: 'daily',
+			description: 'replies with daily texts (COMING SOON)'
+		},
+
+		{ 
+			name: 'parsha',
+			description: 'replies with this week\'s parsha reading'
+		}
+
+	];
+
+	client.applications.commands.create(commands);
 	console.log('Ready!');
 });
 
-var delim = '!'; //standard delimiter for commands. default is !, but can be changed.
-var reply;
-client.on('message', async message => {
+//var delim = '!'; //standard delimiter for commands. default is !, but can be changed.
 
-	if (!message.content.startsWith(delim) || message.author.bot) return; //bot does not need to worry about messages w/ out delim or messages sent by itself
+client.on('interactionCreate', async message => {
+
+	if (!message.isCommand()) return; //bot does not need to worry about messages w/ out delim or messages sent by itself
 
 	console.log(message.author + ': ' + message.content); //logs every command made
 
 	//!ping returns Pong
-	if (message.content === delim + 'ping') {
+	if (message.commandName === 'ping') {
 		message.reply('Pong!');
 	}
-	else if (message.content === delim + 'cat') {
+	else if (message.commandName === 'cat') {
 		const { file } = await fetch('https://aws.random.cat/meow').then(response => response.json());
 
 		message.channel.send(file);
 	} 
 	//!daily returns daily content from Calendar API (for now, only returns name of parsha)
-	else if (message.content === delim + 'daily') {
+	else if (message.commandName === 'daily') {
 
 		const { calendar_items } = await fetch('http://www.sefaria.org/api/calendars?timezone=America/New_York').then(response => response.json());
 
@@ -33,7 +59,7 @@ client.on('message', async message => {
 	}
 	//!parsha returns first section of weekly parsha, embed description is edited when reacted w/ emote
 	//FIXME: API currently returns entire chapter, rather than exact parsha
-	else if (message.content === delim + 'parsha') {
+	else if (message.commandName === 'parsha') {
 
 		const { calendar_items } = await fetch('http://www.sefaria.org/api/calendars?timezone=America/New_York').then(res => res.json());
 
