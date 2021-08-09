@@ -1,4 +1,4 @@
-const { Client, MessageEmbed } = require('discord.js');
+const { Client, MessageActionRow, MessageButton, MessageEmbed } = require('discord.js');
 const client = new Client();
 require('dotenv').config();
 const fetch = require('node-fetch');
@@ -46,14 +46,25 @@ client.on('message', async message => {
 		var sectionEnd = sectionNums[4];
 
 		var section = 0;
-		var sectionMax = text.length;
+		//var sectionMax = text.length;
 
+		//initial display
 		const parsha = new MessageEmbed()
 		.setTitle(calendar_items[0].title.en + ' | ' +  calendar_items[0].displayValue.en + '\n ' + calendar_items[0].title.he + ' | ' + calendar_items[0].displayValue.he)
 		.setColor(0x212e50)
 		.setDescription(text[section].map(s => s.replace(/\<\/?i\>/g, '')));
+
+
+		//buttons for navigation (inactive for now)
+		const row = new MessageActionRow()
+			.addComponents(
+				new MessageButton() //links back to the original text on sefaria.org
+				.setUrl('http://www.sefaria.org/api/texts/' + calendar_items[0].url)
+				.setLabel('Link')
+				.setStyle('LINK'),
+			)
 		
-		message.channel.send(parsha);
+		await message.reply({ content: 'TEST', ephemeral: true, embeds: [parsha], components: [row] });
 	}
 
 
