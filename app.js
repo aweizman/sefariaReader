@@ -3,32 +3,30 @@ const client = new Client();
 require('dotenv').config();
 const fetch = require('node-fetch');
 
+const commands = [
+	{
+		name: 'ping',
+		description: 'replies with pong'
+	},
+
+	{
+		name: 'cat',
+		description: 'replies with a picture of a cat'
+	},
+
+	{
+		name: 'daily',
+		description: 'replies with daily texts (COMING SOON)'
+	},
+
+	{ 
+		name: 'parsha',
+		description: 'replies with this week\'s parsha reading'
+	}
+
+];
+
 client.once('ready', () => {
-
-	//creating commands
-	const commands = [
-		{
-			name: 'ping',
-			description: 'replies with pong'
-		},
-
-		{
-			name: 'cat',
-			description: 'replies with a picture of a cat'
-		},
-
-		{
-			name: 'daily',
-			description: 'replies with daily texts (COMING SOON)'
-		},
-
-		{ 
-			name: 'parsha',
-			description: 'replies with this week\'s parsha reading'
-		}
-
-	];
-
 	client.application.commands.create(commands);
 	console.log('Ready!');
 });
