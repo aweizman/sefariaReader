@@ -35,18 +35,9 @@ client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return; // bot does not need to worry about messages w/ out delim or messages sent by itself
 
 	console.log(interaction.author + ': ' + interaction.content); // logs every command made
-
-	// /ping returns Pong!
-	if (interaction.commandName === 'ping') {
-		await interaction.reply('Pong!');
-	}
-	else if (interaction.commandName === 'cat') {
-		const { file } = await fetch('https://aws.random.cat/meow').then(response => response.json());
-
-		await interaction.reply(file);
-	} 
+	
 	// /daily returns daily content from Calendar API (for now, only returns name of parsha)
-	else if (interaction.commandName === 'daily') {
+	if (interaction.commandName === 'daily') {
 
 		const { calendar_items } = await fetch('http://www.sefaria.org/api/calendars?timezone=America/New_York').then(response => response.json());
 
