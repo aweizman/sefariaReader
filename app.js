@@ -1,30 +1,22 @@
 const { Client, MessageActionRow, MessageButton, MessageEmbed } = require('discord.js');
 const client = new Client();
 require('dotenv').config();
+const { REST } = require('@discordjs/rest');
+const { Routes } = require('discord-api-types/v9');
 const fs = require('fs');
 
-const commands = [
-	{
-		name: 'ping',
-		description: 'replies with pong'
-	},
+client.commands = new Collection();
 
-	{
-		name: 'cat',
-		description: 'replies with a picture of a cat'
-	},
+// takes all the command files
+const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 
-	{
-		name: 'daily',
-		description: 'replies with daily texts (COMING SOON)'
-	},
+for (const file of commandFiles) {
+	const command = require(`./commands/${file}`);
+	// set a new item in the Collection
+	// with the key as the command name and the value as the exported module
+	client.commands.set(command.data.name, command);
+}
 
-	{ 
-		name: 'parsha',
-		description: 'replies with this week\'s parsha reading'
-	}
-
-];
 
 client.once('ready', () => {
 	console.log('Ready!');
@@ -35,6 +27,14 @@ client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return; // bot does not need to worry about messages w/ out delim or messages sent by itself
 
 	console.log(interaction.author + ': ' + interaction.content); // logs every command made
+
+	try {
+		await client.commands.get(interaction.commandName).execute(interaction);
+	} catch (error) {
+		console.error(error);
+		await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
+	}
+
 });
 
 client.login(process.env.TOKEN);
