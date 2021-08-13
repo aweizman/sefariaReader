@@ -1,7 +1,7 @@
 const { Client, MessageActionRow, MessageButton, MessageEmbed } = require('discord.js');
 const client = new Client();
 require('dotenv').config();
-const fetch = require('node-fetch');
+const fs = require('fs');
 
 const commands = [
 	{
