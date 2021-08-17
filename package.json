@@ -4,11 +4,10 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js",
+    "start": "node ./guildCommands.js && node app.js",
     "dev": "nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "add-guild-commands": "node ./guildCommands.js",
-    "reload": "node ./guildCommands.js && node app.js"
+    "add-guild-commands": "node ./guildCommands.js"
   },
   "keywords": [],
   "author": "",
