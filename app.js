@@ -1,5 +1,5 @@
-const { Client, MessageActionRow, MessageButton, MessageEmbed } = require('discord.js');
-const client = new Client();
+const { Client, MessageActionRow, MessageButton, Collection, Intents, MessageEmbed } = require('discord.js');
+const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 require('dotenv').config();
 const fs = require('fs');
 
@@ -14,8 +14,6 @@ for (const file of commandFiles) {
 	// with the key as the command name and the value as the exported module
 	client.commands.set(command.data.name, command);
 }
-
-const rest = new REST({ version: '9' }).setToken(process.env.TOKEN);
 
 
 client.once('ready', () => {
