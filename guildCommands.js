@@ -13,12 +13,16 @@ for (const file of commandFiles) {
 
 const rest = new REST({ version: '9' }).setToken(process.env.TOKEN);
 
+// temporarily used for testing on discord server
+const client_id = "854421123362193429";
+const guild_id = "854748615427751976";
+
 (async () => {
 	try {
 		console.log('Started refreshing application (/) commands.');
 
 		await rest.put(
-			Routes.applicationGuildCommands(CLIENT_ID, GUILD_ID),
+			Routes.applicationGuildCommands(client_id, guild_id),
 			{ body: commands },
 		);
 
