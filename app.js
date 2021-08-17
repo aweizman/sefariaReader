@@ -19,12 +19,15 @@ client.once('ready', () => {
 });
 
 client.on('interactionCreate', async interaction => {
-	if (!interaction.isCommand()) return; // bot does not need to worry about messages w/ out delim or messages sent by itself
-	const { commandName } = interaction;
-	if (!client.commands.has(commandName)) return;
+	console.log('received interaction');
+	if (!interaction.isCommand()) return;
+
+	const command = client.commands.get(interaction.commandName);
+
+	if (!command) return;
 
 	try {
-		await client.commands.get(commandName).execute(interaction);
+		await client.commands.execute(interaction);
 	} catch (error) {
 		console.error(error);
 		await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
