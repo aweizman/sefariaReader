@@ -12,7 +12,9 @@ module.exports = {
 
         const { calendar_items } = await fetch('http://www.sefaria.org/api/calendars?timezone=America/New_York').then(res => res.json());
 
-		const { text } = await fetch('http://www.sefaria.org/api/texts/' + calendar_items[0].url).then(res => res.json());
+		const { text } = await fetch('http://www.sefaria.org/api/texts/Numbers.25.10-30.1').then(res => res.json());
+	
+		//'http://www.sefaria.org/api/texts/' + calendar_items[0].url)
 
 		var sectionNums = calendar_items[0].url.split(/[-.]/g); // [2] and [4] of sectionNums are the start and end lines of the parsha
 
