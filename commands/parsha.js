@@ -10,9 +10,11 @@ module.exports = {
 
         // FIXME: API currently returns entire chapter, rather than exact parsha
 
-        const { calendar_items } = await fetch('http://www.sefaria.org/api/calendars?timezone=America/New_York').then(res => res.json());
+        const { calendar_items } = await fetch('http://www.sefaria.org/api/calendars?timezone=America/New_York')
+			.then(response => response.json());
 
-		const { text } = await fetch('http://www.sefaria.org/api/texts/Numbers.25.10-30.1').then(res => res.json());
+		const { text } = await fetch('http://www.sefaria.org/api/texts/Numbers.25.10-30.1')
+			.then(res => res.json());
 	
 		//'http://www.sefaria.org/api/texts/' + calendar_items[0].url)
 
@@ -29,7 +31,7 @@ module.exports = {
 		const parsha = new MessageEmbed()
 		.setTitle(calendar_items[0].title.en + ' | ' +  calendar_items[0].displayValue.en + '\n ' + calendar_items[0].title.he + ' | ' + calendar_items[0].displayValue.he)
 		.setColor(0x212e50)
-		.addField('Parsha Text', text[section], true);
+		.addField('Parsha Text', text, true);
 		//text[section].map(s => s.replace(/\<\/?i\>/g, ''))
 
 
