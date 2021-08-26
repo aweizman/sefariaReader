@@ -27,7 +27,7 @@ module.exports = {
 		const parsha = new MessageEmbed()
 		.setTitle(calendar_items[0].title.en + ' | ' +  calendar_items[0].displayValue.en + '\n ' + calendar_items[0].title.he + ' | ' + calendar_items[0].displayValue.he)
 		.setColor(0x212e50)
-		.addField('Parsha Text', 'test', true);
+		.addField('Parsha Text', text[section], true);
 		//text[section].map(s => s.replace(/\<\/?i\>/g, ''))
 
 
