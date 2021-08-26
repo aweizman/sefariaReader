@@ -1,6 +1,6 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const fetch = require('node-fetch');
-const { MessageEmbed } = require('discord.js');
+const { MessageEmbed, MessageActionRow, MessageButton } = require('discord.js');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -27,16 +27,19 @@ module.exports = {
 		const parsha = new MessageEmbed()
 		.setTitle(calendar_items[0].title.en + ' | ' +  calendar_items[0].displayValue.en + '\n ' + calendar_items[0].title.he + ' | ' + calendar_items[0].displayValue.he)
 		.setColor(0x212e50)
-		.setDescription(text[section].map(s => s.replace(/\<\/?i\>/g, '')));
+		.addField('Parsha Text', 'test', true);
+		//text[section].map(s => s.replace(/\<\/?i\>/g, ''))
 
 
-		// buttons for navigation (inactive for now)
+		// buttons to link to original text
+		const linkBtn = new MessageButton() // links back to the original text on sefaria.org
+			.setUrl('http://www.sefaria.org/api/texts/' + calendar_items[0].url)
+			.setLabel('Link')
+			.setStyle('LINK');
+
 		const row = new MessageActionRow()
 			.addComponents(
-				new MessageButton() // links back to the original text on sefaria.org
-				.setUrl('http://www.sefaria.org/api/texts/' + calendar_items[0].url)
-				.setLabel('Link')
-				.setStyle('LINK'),
+				linkBtn,
 			)
 		
 		await interaction.reply({ content: 'TEST', ephemeral: true, embeds: [parsha], components: [row] });
