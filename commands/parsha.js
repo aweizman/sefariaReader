@@ -14,7 +14,7 @@ module.exports = {
 			.then(response => response.json());
 
 		const { text } = await fetch('http://www.sefaria.org/api/texts/Numbers.25.10-30.1')
-			.then(res => res.json());
+			.then(response => response.json());
 	
 		//'http://www.sefaria.org/api/texts/' + calendar_items[0].url)
 

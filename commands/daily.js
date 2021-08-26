@@ -9,6 +9,6 @@ module.exports = {
         const { calendar_items } = await fetch('http://www.sefaria.org/api/calendars?timezone=America/New_York')
 			.then(response => response.json());
 
-		await interaction.reply(calendar_items[0].title.en + ' - ' + calendar_items[0].displayValue.en + '\n' + calendar_items[0].title.he + ' - ' + calendar_items[0].displayValue.he);
+		await interaction.reply(calendar_items[0].title.en + ' | ' + calendar_items[0].displayValue.en + '\n' + calendar_items[0].title.he + ' | ' + calendar_items[0].displayValue.he);
 	},
 };
