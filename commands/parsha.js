@@ -31,8 +31,8 @@ module.exports = {
 		const parsha = new MessageEmbed()
 		.setTitle(calendar_items[0].title.en + ' | ' +  calendar_items[0].displayValue.en + '\n ' + calendar_items[0].title.he + ' | ' + calendar_items[0].displayValue.he)
 		.setColor(0x212e50)
-		.addField('Parsha Text', text, true);
-		//text[section].map(s => s.replace(/\<\/?i\>/g, ''))
+		// need to concat strings of each element in text[0]
+		.addField('Parsha Text:', text[0].map(s => s.replace(/\<\/?i\>/g, '')), true);
 
 
 		// buttons to link to original text
