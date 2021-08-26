@@ -33,7 +33,7 @@ module.exports = {
 
 		// buttons to link to original text
 		const linkBtn = new MessageButton() // links back to the original text on sefaria.org
-			.setUrl('http://www.sefaria.org/api/texts/' + calendar_items[0].url)
+			.setURL('http://www.sefaria.org/api/texts/' + calendar_items[0].url)
 			.setLabel('Link')
 			.setStyle('LINK');
 
@@ -42,6 +42,6 @@ module.exports = {
 				linkBtn,
 			)
 		
-		await interaction.reply({ content: 'TEST', ephemeral: true, embeds: [parsha], components: [row] });
+		await interaction.reply({ ephemeral: false, embeds: [parsha], components: [row] });
 	},
 };
