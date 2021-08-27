@@ -8,7 +8,7 @@ module.exports = {
 		.setDescription('Replies with the weekly parsha'),
 	async execute(interaction) {
 
-        // FIXME: API currently returns entire chapter, rather than exact parsha
+        // FIXME: make it so that it displays by portion or by chapter. MAX 25 FIELDS.
 
         const { calendar_items } = await fetch('http://www.sefaria.org/api/calendars?timezone=America/New_York')
 			.then(response => response.json());
@@ -27,17 +27,32 @@ module.exports = {
 		var section = 0;
 		// var sectionMax = text.length;
 
-		// initial display
+		// getting rid of <i> and </i> which can sometimes appear in text
+		sampleText = text[0].map(s => s.replace(/\<\/?i\>/g, ''));
+
+		// combining all strings into a single array element
+		var parshaText = [];
+		var i = 0;
+		text.forEach(element => {
+			element.forEach(segment => {
+				parshaText[i] += segment;
+			});			
+			i++;
+		});
+
 		const parsha = new MessageEmbed()
 		.setTitle(calendar_items[0].title.en + ' | ' +  calendar_items[0].displayValue.en + '\n ' + calendar_items[0].title.he + ' | ' + calendar_items[0].displayValue.he)
-		.setColor(0x212e50)
-		// need to concat strings of each element in text[0]
-		.addField('Parsha Text:', text[0].map(s => s.replace(/\<\/?i\>/g, '')), true);
+		.setColor(0x212e50);
 
+		text.forEach(element => {
+			element.forEach(segment => {
+				parsha.addField('test', segment, false);
+			});			
+		});
 
 		// buttons to link to original text
 		const linkBtn = new MessageButton() // links back to the original text on sefaria.org
-			.setURL('http://www.sefaria.org/api/texts/' + calendar_items[0].url)
+			.setURL('http://www.sefaria.org/' + calendar_items[0].url)
 			.setLabel('Link')
 			.setStyle('LINK');
 
