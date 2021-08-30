@@ -73,9 +73,23 @@ module.exports = {
 			.setLabel('Link')
 			.setStyle('LINK');
 
+		var nextBtn = new MessageButton()
+			.setCustomId('next')
+			.setLabel('Next')
+			.setStyle('PRIMARY')
+			.setDisabled(false)
+
+		var backBtn = new MessageButton()
+			.setCustomId('back')
+			.setLabel('Back')
+			.setStyle('PRIMARY')
+			.setDisabled(true)
+
 		const row = new MessageActionRow()
 			.addComponents(
+				backBtn,
 				linkBtn,
+				nextBtn,
 			)
 		
 		await interaction.reply({ ephemeral: false, embeds: [parsha], components: [row] });
