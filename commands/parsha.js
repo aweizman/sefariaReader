@@ -13,10 +13,12 @@ module.exports = {
         const { calendar_items } = await fetch('http://www.sefaria.org/api/calendars?timezone=America/New_York')
 			.then(response => response.json());
 
-		const { text } = await fetch('http://www.sefaria.org/api/texts/Numbers.25.10-30.1')
-			.then(response => response.json());
 	
-		//'http://www.sefaria.org/api/texts/' + calendar_items[0].url)
+		const textURL = 'http://www.sefaria.org/api/texts/' + calendar_items[0].url;
+		console.log('URL: ' + textURL);
+
+		const { text } = await fetch(textURL)
+			.then(response => response.json());
 
 		var sectionNums = calendar_items[0].url.split(/[-.]/g); // [2] and [4] of sectionNums are the start and end lines of the parsha
 
@@ -26,6 +28,8 @@ module.exports = {
 
 		var section = 0;
 		// var sectionMax = text.length;
+		console.log('Chapters & verses: ' + calendar_items[0].url);
+		console.log('Beginning & ending verses: ' + sectionStart + ' | ' + sectionEnd);
 
 		// getting rid of <i> and </i> which can sometimes appear in text
 		// sampleText = text[0].map(s => s.replace(/\<\/?i\>/g, ''));
