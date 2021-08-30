@@ -33,20 +33,34 @@ module.exports = {
 			if (button.customId === 'next') {
 				section++;
 				// update message
+				await button.update({});
 				if (section == sectionMax-1){
 					// update next button to be disabled
+					button.update({
+						components: [backBtn, linkBtn, nextBtn.setDisabled(true)]
+					});
 				}
 				if (section == 1) {
 					// update back button to not be disabled
+					button.update({
+						components: [backBtn.setDisabled(false), linkBtn, nextBtn]
+					});
 				}
 			} else if (button.customId === 'back') {
 				section--;
 				// update message
+				await button.update({});
 				if (section == 0) {
 					// update back button to be disabled
+					button.update({
+						components: [backBtn.setDisabled(true), linkBtn, nextBtn]
+					});
 				}
 				if (section == sectionMax-2) {
 					// update next button to not be disabled
+					button.update({
+						components: [backBtn, linkBtn, nextBtn.setDisabled(false)]
+					});
 				}
 			}
 		});
