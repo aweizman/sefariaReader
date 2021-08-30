@@ -28,7 +28,18 @@ module.exports = {
 		// var sectionMax = text.length;
 
 		// getting rid of <i> and </i> which can sometimes appear in text
-		sampleText = text[0].map(s => s.replace(/\<\/?i\>/g, ''));
+		// sampleText = text[0].map(s => s.replace(/\<\/?i\>/g, ''));
+
+		// trimming off front
+		text[0].splice(0, sectionStart);
+
+		// trimming off end
+		text[text.length-1].splice(sectionEnd, text[text.length-1]-1);
+
+		// getting rid of <i> and </i> which can sometimes appear in text
+		text.forEach(element => {
+			element = element.map(s => s.replace(/\<\/?i\>/g, ''));
+		});
 
 		// combining all strings into a single array element
 		var parshaText = [];
