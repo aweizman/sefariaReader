@@ -35,14 +35,16 @@ module.exports = {
 		// sampleText = text[0].map(s => s.replace(/\<\/?i\>/g, ''));
 
 		// trimming off front
-		text[0].splice(0, sectionStart);
+		text[0].splice(0, sectionStart-1);
 
 		// trimming off end
 		text[text.length-1].splice(sectionEnd, text[text.length-1]-1);
 
-		// getting rid of <i> and </i> which can sometimes appear in text
+		// getting rid of <i> and </i> which can sometimes appear in text. DOES NOT WORK
+		var i = 0;
 		text.forEach(element => {
-			element = element.map(s => s.replace(/\<\/?i\>/g, ''));
+			text[i] = element.map(s => s.replace(/\<\/?i\>/g, ''));
+			i++;
 		});
 
 		// combining all strings into a single array element
