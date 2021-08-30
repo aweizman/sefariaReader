@@ -8,7 +8,7 @@ module.exports = {
 		.setDescription('Replies with the weekly parsha'),
 	async execute(interaction) {
 
-        // FIXME: make it so that it displays by portion or by chapter. MAX 25 FIELDS.
+        const collector = interaction.channel.createMessageComponentCollector({ filter, time: 15000 });
 
         const { calendar_items } = await fetch('http://www.sefaria.org/api/calendars?timezone=America/New_York')
 			.then(response => response.json());
@@ -27,7 +27,30 @@ module.exports = {
 		var sectionEnd = sectionNums[4];
 
 		var section = 0;
-		// var sectionMax = text.length;
+		var sectionMax = text.length;
+
+		collector.on('collect', async button => {
+			if (button.customId === 'next') {
+				section++;
+				// update message
+				if (section == sectionMax-1){
+					// update next button to be disabled
+				}
+				if (section == 1) {
+					// update back button to not be disabled
+				}
+			} else if (button.customId === 'back') {
+				section--;
+				// update message
+				if (section == 0) {
+					// update back button to be disabled
+				}
+				if (section == sectionMax-2) {
+					// update next button to not be disabled
+				}
+			}
+		});
+
 		console.log('Chapters & verses: ' + calendar_items[0].url);
 		console.log('Beginning & ending verses: ' + sectionStart + ' | ' + sectionEnd);
 
