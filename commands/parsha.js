@@ -63,7 +63,7 @@ module.exports = {
 
 		text.forEach(element => {
 			element.forEach(segment => {
-				parsha.addField('test', segment, false);
+				parsha.addField('*', segment, false);
 			});			
 		});
 
