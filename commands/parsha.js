@@ -8,7 +8,7 @@ module.exports = {
 		.setDescription('Replies with the weekly parsha'),
 	async execute(interaction) {
 
-        const collector = interaction.channel.createMessageComponentCollector({ filter, time: 15000 });
+        //const collector = interaction.channel.createMessageComponentCollector({ filter, time: 15000 });
 
         const { calendar_items } = await fetch('http://www.sefaria.org/api/calendars?timezone=America/New_York')
 			.then(response => response.json());
@@ -29,7 +29,7 @@ module.exports = {
 		var section = 0;
 		var sectionMax = text.length;
 
-		collector.on('collect', async button => {
+		/*collector.on('collect', async button => {
 			if (button.customId === 'next') {
 				section++;
 				// update message
@@ -63,7 +63,7 @@ module.exports = {
 					});
 				}
 			}
-		});
+		});*/
 
 		console.log('Chapters & verses: ' + calendar_items[0].url);
 		console.log('Beginning & ending verses: ' + sectionStart + ' | ' + sectionEnd);
